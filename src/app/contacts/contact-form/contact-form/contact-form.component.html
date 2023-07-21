@@ -1,0 +1,47 @@
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm.value)">
+  <div class="mt-5">
+    <div class="form-group mb-3 col-sm-5">
+      <input type="hidden" name="id" formControlName="id">
+      <label for="name" class="form-label fw-bold">Name</label>
+      <input type="text" id="name" formControlName="name" class="form-control" name="name" placeholder="Enter contact name..." aria-label="Enter contact name">
+      <div *ngIf="!contactForm.get('name').valid && contactForm.get('name').touched" class="invalid-data">
+        Contact name is required!
+      </div>
+    </div>
+    <div class="form-group mb-3 col-sm-5">
+      <label for="email" class="form-label fw-bold">Email</label>
+      <input type="email" id="email" formControlName="email" class="form-control" name="email" placeholder="Enter contact email..." aria-label="Enter contact email">
+      <div *ngIf="!contactForm.get('email').valid && contactForm.get('email').touched">
+        <div *ngIf="contactForm.get('email').errors.required" class="invalid-data">
+          Contact email is required!
+        </div>
+        <div *ngIf="contactForm.get('email').errors.email" class="invalid-data">
+          Please enter a valid email!
+        </div>
+      </div>
+    </div>
+    <div class="form-group mb-3 col-sm-5">
+      <label for="number" class="form-label fw-bold">Contact</label>
+      <input type="text" id="number" formControlName="number" class="form-control" name="number" placeholder="Enter contact number..." aria-label="Enter contact number">
+      <div *ngIf="!contactForm.get('number').valid && contactForm.get('number').touched">
+        <div *ngIf="contactForm.get('number').errors.required" class="invalid-data">
+          Contact number is required!
+        </div>
+        <div *ngIf="contactForm.get('number').errors.maxlength" class="invalid-data">
+          Contact number need only 11 characters length!
+        </div>
+        <div *ngIf="contactForm.get('number').errors.pattern" class="invalid-data">
+          Contact number accepts only numbers!
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-primary" [disabled]="!contactForm.valid">
+        <fa-icon *ngIf="!editMode" [icon]="iconAdd"></fa-icon>
+        <fa-icon *ngIf="editMode" [icon]="iconUpdate"></fa-icon>
+        {{ (!editMode) ? 'Add Contact' : 'Update Contact' }}
+      </button>
+    </div>
+  </div>
+</form>

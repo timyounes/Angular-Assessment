@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-12">
+    <app-contact-form [editMode]="editModeChanged" (newContactDataEvent)="onAddNewContact($event)" (updatedContactDataEvent)="onUpdateContact($event)"></app-contact-form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <app-contact-list [contacts]="myContacts" (contactSelected)="onDoActionSelected($event)"></app-contact-list>
+  </div>
+</div>
+<!-- <div class="row">
+  <div class="col-md-12">
+    <router-outlet></router-outlet>
+    <app-view-contact [contact]="viewSelectedContact" (updateAction)="updateCurrentAction($event)"></app-view-contact>
+  </div>
+</div> -->
